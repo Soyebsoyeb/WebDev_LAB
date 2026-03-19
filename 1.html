@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>qOne</title>
+		<script src="./script.js" defer> </script>
+	</head>
+	<body>
+		Number  : <input id="inp" placeholder="Enter the Number">
+		<button id="btn">Change to Words</button>
+		<p id="dsp"></p>
+	</body>
+	<script> 
+		  const btn = document.getElementById("btn");
+const inp = document.getElementById("inp");
+const dsp = document.getElementById("dsp");
+
+const regex = /^\d{1,3}$/;
+
+btn.addEventListener('click', () => {
+	var value = inp.value.trim();
+
+	if (!regex.test(value)) {
+		dsp.innerText = "Error: Please enter a valid number (0-999) without alphabets, special characters, or >=4 digits.";
+	} else {
+		let num = formText(parseInt(value, 10));
+		dsp.innerText = num;
+	}
+});
+
+function formText(value) {
+	var ones = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+	var tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+
+	if (value < 20) return ones[value];
+	if (value < 100) return tens[Math.floor(value / 10)] + (value % 10 !== 0 ? ' ' + ones[Math.floor(value % 10)] : "");
+	else {
+		let result = ones[Math.floor(value / 100)] + " hundred";
+		if (value % 100 !== 0) {
+			result += " and " + formText(value % 100);
+		}
+		return result;
+	}
+}
+	</script>
+</html>

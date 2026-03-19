@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>qFive</title>
+</head>
+
+<body>
+	<h2>User Registration Page</h2>
+	<form name="regForm">
+		<table border="0">
+			<tr>
+				<td>First Name:</td>
+				<td><input type="text" id="fname" placeholder="Min 6 chars, alphabets only"></td>
+			</tr>
+			<tr>
+				<td>Last Name:</td>
+				<td><input type="text" id="lname"></td>
+			</tr>
+			<tr>
+				<td>Address:</td>
+				<td><textarea id="address"></textarea></td>
+			</tr>
+			<tr>
+				<td>Email ID:</td>
+				<td><input type="text" id="email" placeholder="name@domain.com"></td>
+			</tr>
+			<tr>
+				<td>Mobile Number:</td>
+				<td><input type="text" id="mobile" placeholder="10 digits"></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type="password" id="pwd" placeholder="Min 6 chars"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<br>
+					<input type="button" value="Register" onclick="validateForm()">
+				</td>
+			</tr>
+		</table>
+	</form>
+
+	<script>
+		function validateForm() {
+			var fname = document.getElementById("fname").value;
+			var lname = document.getElementById("lname").value;
+			var address = document.getElementById("address").value;
+			var email = document.getElementById("email").value;
+			var mobile = document.getElementById("mobile").value;
+			var pwd = document.getElementById("pwd").value;
+
+			// Validation for First Name
+			if (fname.length < 6 || !/^[a-zA-Z]+$/.test(fname)) {
+				alert("First Name should contain only alphabets and be at least 6 characters long.");
+				return;
+			}
+
+			// Validation for Last Name and Address
+			if (lname.trim() === "") {
+				alert("Last Name should not be empty.");
+				return;
+			}
+			if (address.trim() === "") {
+				alert("Address should not be empty.");
+				return;
+			}
+
+			// Validation for Email
+			var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+			if (!emailPattern.test(email)) {
+				alert("Please enter a valid Email ID (e.g., name@domain.com).");
+				return;
+			}
+
+			// Validation for Mobile Number
+			var mobilePattern = /^[0-9]{10}$/;
+			if (!mobilePattern.test(mobile)) {
+				alert("Mobile Number must contain exactly 10 digits.");
+				return;
+			}
+
+			// Validation for Password
+			if (pwd.length < 6) {
+				alert("Password minimum length must be 6 characters.");
+				return;
+			}
+
+			alert("Registration Successful!");
+		}
+	</script>
+</body>
+
+</html>
